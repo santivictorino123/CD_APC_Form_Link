@@ -1,0 +1,74 @@
+﻿body
+{
+    display:block;
+}  
+.edit-mode {
+    }
+
+    .edit-user {
+    }
+
+        .edit-user display-mode {
+        }
+
+    .save-user edit-mode {
+    }
+
+    .display-mode {
+    }
+
+    .cancel-user {
+    }
+
+    .webgrid-table {
+        font-size: 18px;
+        font-weight: normal;
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+        border: solid 1px #2F7F70;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #CCC;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header, .webgrid-header a {
+        background-color:#2F7F70;
+        color: white;
+        text-align: left;
+        text-decoration: none;
+        font-weight:200 !important;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #F5F5F5;
+        padding: 3px 7px 2px;
+    }
+
+    .col1Width {
+        width: 50px;
+    }
+
+    .col2Width {
+        width: 200px;
+    }
+    .subtitle
+    {
+        background-color: #0BA083;
+        font-size: 26px;
+        color: white;
+        font-weight: 900;
+        padding: 10px;
+        margin-bottom:20px;
+        text-transform:uppercase;
+    }

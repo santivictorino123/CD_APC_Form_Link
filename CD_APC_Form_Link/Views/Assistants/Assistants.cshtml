@@ -1,0 +1,143 @@
+﻿@model CD_APC_Form_Link.Models.Assistants.Assistants
+
+@{
+    ViewBag.Title = "Assistants";
+}
+
+
+@using (Html.BeginForm("Save", "Assistants", FormMethod.Post, new { model = Model, enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="form-assistants" class="form-horizontal" style="margin-top:80px;">
+        @Html.Hidden("urlData", (Url.Action("GetData", "Assistants")))
+        @Html.Hidden("urlSave", (Url.Action("Save", "Assistants")))
+        @Html.Hidden("urlSaveDocuments", (Url.Action("SaveDocuments", "Assistants")))
+        <div class="subtitle">
+            INFORMACIÓN DEL PARTICIPANTE / PARTICIPANT'S INFORMATION
+        </div>
+        <div class="row">
+            <div class="col-md-2">Nombres / Name *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })</div>
+            <div class="col-md-2">Apellidos / Last name</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Género / Gender *</div>
+            <div class="col-md-4">@Html.DropDownListFor(m => m.Gender, new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })</div>
+            <div class="col-md-2">Nacionalidad / Nationality *</div>
+            <div class="col-md-4">@Html.DropDownListFor(m => m.Nationality, new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })</div>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-2">Fecha de Nacimiento / Birth date *</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.BirthDate, new
+                  {
+                      @class = "form-control"
+                  })
+            </div>
+            <div class="col-md-2">Número de pasaporte / Passport number *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.PassportNumber, new { @class = "form-control" })</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Número de cédula de ciudadanía (para colombianos)</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.IdentityCard, new { @class = "form-control", @type = "number", @maxlength = "10", @size = "10" })
+            </div>
+            <div class="col-md-2">Entidad / Organization *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.Organization, new { @class = "form-control" })</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Cargo / Position *</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Position, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">Especificaciones dietarias / Dietary requirements *</div>
+                    <div class="col-md-8">@Html.DropDownListFor(m => m.DietaryRequirements, new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })</div>
+                </div>
+                <div class="row other-dietary-requirements" style="display:none">
+                    <div class="col-md-4">Cual ? </div>
+                    <div class="col-md-8">@Html.TextBoxFor(m => m.OthersDietaryRequirements, new { @class = "form-control" })</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Correo electrónico / e-mail *</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Email, new { type = "email", placeholder = "user@correo.com", @class = "form-control" })
+            </div>
+            <div class="col-md-2">Celular (incluya el código de país) / Mobile (include country code) *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.CellPhone, new { @class = "form-control", @type = "number" })</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Nombre en skype / Skype name</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Skype, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="subtitle">
+            Requisitos del viaje / Travel requirements
+        </div>
+        <div class="row">
+            <div class="col-md-2">Copia de la página con foto del pasaporte</div>
+            <div class="col-md-4">
+                <input type="file" name="file1" id="passport" />
+            </div>
+
+            <div class="col-md-2">Copia de las visas vigentes</div>
+            <div class="col-md-4">
+                <input type="file" name="file2" id="visa" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Copia de la autorización de la comisión (resolución) o copia del contrato (para colombianos)</div>
+            <div class="col-md-4">
+                <input type="file" name="file3" id="autorizacion" />
+            </div>
+
+            <div class="col-md-2">Copia del carnet de vacunación para fiebre amarilla (cuando sea necesario)</div>
+            <div class="col-md-4">
+                <input type="file" name="file4" id="vacunacion" />
+            </div>
+        </div>
+        <div class="subtitle">
+            Información del viaje / Travel information
+        </div>
+
+        @Html.Partial("_Travels", Model.Travels)
+
+        <div class="subtitle">
+            Contacto de emergencia
+        </div>
+        <div class="row">
+            <div class="col-md-2">Nombre y apellido / Name and last name *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.NameContact, new { @class = "form-control" })</div>
+            <div class="col-md-2">Teléfono / Phone number *</div>
+            <div class="col-md-4">@Html.TextBoxFor(m => m.PhoneNumberContact, new { @class = "form-control" })</div>
+        </div>
+        <div class="row">
+                    <div class="col-md-2">Correo electrónico / e-mail *</div>
+
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.EmailContact, new { type = "email", placeholder = "user@correo.com", @class = "form-control" })
+            </div>
+            </div>
+
+            <div class="subtitle">
+                Alojamiento / Lodging
+            </div>
+            <div class="row">
+                <div class="col-md-2">Fecha de llegada / Arrival date</div>
+                <div class="col-md-4">@Html.TextBoxFor(m => m.ArrivalDateLodging, new { @class = "form-control" })</div>
+                <div class="col-md-2">Fecha de salida / Departure date</div>
+                <div class="col-md-4">@Html.TextBoxFor(m => m.DepartureDateLodging, new { @class = "form-control" })</div>
+            </div>
+        </div>
+}
+
+<div class="well center-block" style="width:100%;margin-top:50px">
+    <button id="save-user" value="save" class="btn btn-success btn-lg save-user" onclick="GridUtils.SaveDocumentsAndForm()" style="width:100%">Guardar / Save</button>
+
+</div>
